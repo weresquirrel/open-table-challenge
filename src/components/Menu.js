@@ -2,23 +2,33 @@ import React from "react";
 import Data from './../../menu-data.json';
 
 class Menu extends React.Component {
+
   render() {
-    console.log(Data.starters);
+    const categories = Object.keys(Data);
+    // console.log(Data.starters);
+    console.log(categories);
+
     return (
       <div>
-        <p>STARTERS</p>
+         {//find the categories
+         }
+        {categories.map(category =>
 
-        {Data.starters.map(starter =>
-          <div key={starter.id} id={starter.id}>
-            <p>{starter.name}</p>
-            <p>£{starter.price}</p>
-            <button>+</button>
+          <div key={category}>
+            <p>/{category}/</p>
           </div>
         )}
 
-        <p>-------</p>
-        <p>Mains</p>
-        <p>Desserts</p>
+        {//find the dishes inside a category
+        }
+        <p>STARTERS</p>
+        {Data.starters.map(starter =>
+          <div key={starter.id}>
+            <p>{starter.name}</p>
+            <p>£{starter.price}</p>
+            <button id={starter.id} onClick={this.props.addItem}>+</button>
+          </div>
+        )}
 
       </div>
     );
