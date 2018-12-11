@@ -5,28 +5,39 @@ class Menu extends React.Component {
 
   render() {
     const categories = Object.keys(Data);
+
     // console.log(Data.starters);
     console.log(categories);
 
     return (
       <div>
-         {//find the categories
-         }
-        {categories.map(category =>
-
-          <div key={category}>
-            <p>/{category}/</p>
-          </div>
-        )}
 
         {//find the dishes inside a category
         }
         <p>STARTERS</p>
-        {Data.starters.map(starter =>
-          <div key={starter.id}>
-            <p>{starter.name}</p>
-            <p>£{starter.price}</p>
-            <button id={starter.id} onClick={this.props.addItem}>+</button>
+        {Data.starters.map(dish =>
+          <div key={dish.id}>
+            <p>{dish.name}</p>
+            <p>£{dish.price}</p>
+            <button id={dish.id} onClick={this.props.addItem}>+</button>
+          </div>
+        )}
+
+        <p>MAINS</p>
+        {Data.mains.map(dish =>
+          <div key={dish.id}>
+            <p>{dish.name}</p>
+            <p>£{dish.price}</p>
+            <button id={dish.id} onClick={this.props.addItem}>+</button>
+          </div>
+        )}
+
+        <p>DES</p>
+        {Data.desserts.map(dish =>
+          <div key={dish.id}>
+            <p>{dish.name}</p>
+            <p>£{dish.price}</p>
+            <button id={dish.id} onClick={this.props.addItem}>+</button>
           </div>
         )}
 
