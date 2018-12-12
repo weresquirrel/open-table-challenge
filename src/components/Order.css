@@ -1,0 +1,59 @@
+.order {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 6px;
+  flex-grow: 2;
+  margin: 10px;
+  padding: 10px;
+  align-self: flex-end;
+  color: #333333;
+}
+
+.order h2 {
+  text-align: center;
+}
+
+.order .waiter {
+  text-align: center;
+}
+
+.order .messageBox {
+  color: white;
+  background-color: #ad9595;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.order .message {
+  padding: 3px;
+}
+
+.order .ordered {
+  padding: 15px;
+}
+
+.order .dish {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5px;
+}
+
+.order .dishDetails {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.order .minusBtn {
+  width: 20px;
+  height: 20px;
+}
+
+.order .total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+  margin-top: 5px;
+  padding-top: 5px;
+  font-weight: bold;
+}

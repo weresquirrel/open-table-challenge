@@ -1,8 +1,7 @@
 import React from "react";
+import styles from "./Order.css";
 
 class Order extends React.Component {
-
-
   render() {
     const starters = this.props.order.diner1.starters;
     const mains = this.props.order.diner1.mains;
@@ -19,51 +18,65 @@ class Order extends React.Component {
     }
 
     return (
-      <div>
-        <p>YOUR ORDER FOR 2</p>
-        <p>Yor waiter today is Pierre.</p>
-        {messages.map(message =>
-          <div key={message}>
-            {message}
-          </div>
-        )}
+      <div className={styles.order}>
+        <h2>Your order for 2</h2>
+        <p className={styles.waiter}>Yor waiter today is Pierre.</p>
+        <div className={styles.messageBox}>
+          {messages.map(message =>
+            <p key={message} className={styles.message}>
+              {message}
+            </p>
+          )}
+        </div>
 
-        <p>diner 1</p>
-        {starters[0] &&
-          <p>
-            <button id="starter" onClick={this.props.removeItem}>-</button>
-            {starters[0].name}
-            {'........'}
-            £{starters[0].price}
-          </p>
-        }
-        {mains[0] &&
-          <p>
-            <button id="main" onClick={this.props.removeItem}>-</button>
-            {mains[0].name}
-            {'........'}
-            £{mains[0].price}
-          </p>
-        }
-        {desserts[0] &&
-          <p>
-            <button id="dessert" onClick={this.props.removeItem}>-</button>
-            {desserts[0].name}
-            {'........'}
-            £{desserts[0].price}
-          </p>
-        }
-
+        <h3>diner 1</h3>
+        <div className={styles.ordered}>
+          {starters[0] &&
+            <div className={styles.dish}>
+              <button
+                id="starter"
+                onClick={this.props.removeItem}
+                className={styles.minusBtn}
+              >-</button>
+              <div className={styles.dishDetails}>
+                <p>{starters[0].name}</p>
+                <p>£{starters[0].price}</p>
+              </div>
+            </div>
+          }
+          {mains[0] &&
+            <div className={styles.dish}>
+              <button
+                id="main"
+                onClick={this.props.removeItem}
+                className={styles.minusBtn}
+              >-</button>
+              <div className={styles.dishDetails}>
+                <p>{mains[0].name}</p>
+                <p>£{mains[0].price}</p>
+              </div>
+            </div>
+          }
+          {desserts[0] &&
+            <div className={styles.dish}>
+              <button
+                id="dessert"
+                onClick={this.props.removeItem}
+                className={styles.minusBtn}
+              >-</button>
+              <div className={styles.dishDetails}>
+                <p>{desserts[0].name}</p>
+                <p>£{desserts[0].price}</p>
+              </div>
+            </div>
+          }
+        </div>
         {this.props.total > 0 &&
-          <div id="total">
-          <p>-------</p>
-          <p>Total</p>
-          <p>{this.props.total}</p>
+          <div className={styles.total}>
+            <p>Total</p>
+            <p>£{this.props.total}</p>
           </div>
         }
-
-        <p>-------</p>
-
       </div>
     );
   }

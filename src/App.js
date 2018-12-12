@@ -2,6 +2,7 @@ import React from 'react';
 import Menu from './components/Menu';
 import Order from './components/Order';
 import Data from './../menu-data.json';
+import styles from "./App.css";
 import { render } from 'react-dom';
 
 class App extends React.Component {
@@ -22,10 +23,7 @@ class App extends React.Component {
   }
 
     addItem(e) {
-      console.log(e.target.id);
-
       const dishId = parseInt(e.target.id);
-
       this.checkConditions();
 
       Data.starters.map(dish => {
@@ -36,10 +34,7 @@ class App extends React.Component {
             const s = this.state.order.diner1.starters;
             s.push(d);
             this.checkConditions();
-
           }
-
-          console.log(this.state);
         }
       });
       Data.mains.map(dish => {
@@ -51,8 +46,6 @@ class App extends React.Component {
             m.push(d);
             this.checkConditions();
           }
-
-          console.log(this.state);
         }
       });
       Data.desserts.map(dish => {
@@ -62,8 +55,6 @@ class App extends React.Component {
             const de = this.state.order.diner1.desserts;
             de.push(d);
           }
-
-          console.log(this.state);
         }
       });
       this.calculateTotal();
@@ -131,10 +122,17 @@ class App extends React.Component {
 
     render() {
         return (
-          <div>
+          <div className={styles.app}>
             <h1>Restaurant Test</h1>
-            <Order order={this.state.order} total={this.state.total} warning={this.state.warning} removeItem={this.removeItem}/>
-            <Menu addItem={this.addItem}/>
+            <div className={styles.wrap}>
+              <Menu addItem={this.addItem}/>
+              <Order
+                order={this.state.order}
+                total={this.state.total}
+                warning={this.state.warning}
+                removeItem={this.removeItem}
+              />
+            </div>
           </div>
         );
     }
