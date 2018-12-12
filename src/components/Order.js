@@ -1,32 +1,33 @@
 import React from "react";
-// import Data from './../../menu-data.json';
 
 class Order extends React.Component {
 
 
   render() {
-    // console.log(this.props.order.diner1.starters);
-
     const starters = this.props.order.diner1.starters;
-    // const startersLength = starters.length;
-
     const mains = this.props.order.diner1.mains;
-    // const mainsLength = mains.length;
-
     const desserts = this.props.order.diner1.desserts;
-    // const dessertsLength = desserts.length;
 
-    let message = '';
+    let messages = [];
     if(this.props.warning.seaStop == true) {
-      message = 'No more than one seafood/person, please!';
+      const message = 'No more than one seafood/person, please!';
+      messages.push(message);
     }
-
+    if(this.props.warning.mainMust == true) {
+      const message = 'Everyone needs main course.';
+      messages.push(message);
+    }
 
     return (
       <div>
         <p>YOUR ORDER FOR 2</p>
         <p>Yor waiter today is Pierre.</p>
-        <p>{message}</p>
+        {messages.map(message =>
+          <div key={message}>
+            {message}
+          </div>
+        )}
+
         <p>diner 1</p>
         {starters[0] &&
           <p>
@@ -53,11 +54,14 @@ class Order extends React.Component {
           </p>
         }
 
+        {this.props.total > 0 &&
+          <div id="total">
+          <p>-------</p>
+          <p>Total</p>
+          <p>{this.props.total}</p>
+          </div>
+        }
 
-
-        <p>-------</p>
-        <p>Total</p>
-        <p>{this.props.total}</p>
         <p>-------</p>
 
       </div>

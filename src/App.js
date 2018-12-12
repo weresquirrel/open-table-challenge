@@ -10,14 +10,14 @@ class App extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.checkConditions = this.checkConditions.bind(this);
-    
+
     this.calculateTotal = this.calculateTotal.bind(this);
     this.state = {
       total: 0,
       order: {
         diner1: {starters: [], mains: [], desserts: []}
       },
-      warning: {mainMust: true, seaStop: false, onePerCategory: false}
+      warning: {mainMust: true, seaStop: false, minCourse: false}
     };
   }
 
@@ -31,11 +31,12 @@ class App extends React.Component {
       Data.starters.map(dish => {
         if(dish.id == dishId) {
           if(this.state.order.diner1.starters.length < 1 &&
-            this.state.warning.seaStop == false) {
+            (this.state.warning.seaStop == false || dishId !== 4)) {
             const d = {id: dishId, name: dish.name, price: dish.price};
             const s = this.state.order.diner1.starters;
             s.push(d);
             this.checkConditions();
+
           }
 
           console.log(this.state);
@@ -44,7 +45,7 @@ class App extends React.Component {
       Data.mains.map(dish => {
         if(dish.id == dishId) {
           if (this.state.order.diner1.mains.length < 1 &&
-            this.state.warning.seaStop == false) {
+            (this.state.warning.seaStop == false || dishId !== 7)) {
             const d = {id: dishId, name: dish.name, price: dish.price};
             const m = this.state.order.diner1.mains;
             m.push(d);
@@ -109,10 +110,8 @@ class App extends React.Component {
       // main must
       if (this.state.order.diner1.mains.length < 1) {
         newWarning.mainMust = true;
-        // console.log('hello');
       } else {
         newWarning.mainMust = false;
-        // console.log('Kitty');
       }
 
       // seaStop

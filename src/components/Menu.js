@@ -4,13 +4,10 @@ import Data from './../../menu-data.json';
 class Menu extends React.Component {
 
   render() {
-    
 
     return (
       <div>
 
-        {//find the dishes inside a category
-        }
         <p>STARTERS</p>
         {Data.starters.map(dish =>
           <div key={dish.id}>
