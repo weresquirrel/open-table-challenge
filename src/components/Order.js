@@ -16,12 +16,17 @@ class Order extends React.Component {
     const desserts = this.props.order.diner1.desserts;
     // const dessertsLength = desserts.length;
 
+    let message = '';
+    if(this.props.warning.seaStop == true) {
+      message = 'No more than one seafood/person, please!';
+    }
 
 
     return (
       <div>
         <p>YOUR ORDER FOR 2</p>
         <p>Yor waiter today is Pierre.</p>
+        <p>{message}</p>
         <p>diner 1</p>
         {starters[0] &&
           <p>
