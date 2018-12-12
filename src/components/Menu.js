@@ -4,10 +4,7 @@ import Data from './../../menu-data.json';
 class Menu extends React.Component {
 
   render() {
-    const categories = Object.keys(Data);
-
-    // console.log(Data.starters);
-    console.log(categories);
+    
 
     return (
       <div>

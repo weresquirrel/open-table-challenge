@@ -1,51 +1,55 @@
 import React from "react";
-import Data from './../../menu-data.json';
+// import Data from './../../menu-data.json';
 
 class Order extends React.Component {
 
 
   render() {
-    // console.log(Data.desserts);
+    // console.log(this.props.order.diner1.starters);
+
+    const starters = this.props.order.diner1.starters;
+    // const startersLength = starters.length;
+
+    const mains = this.props.order.diner1.mains;
+    // const mainsLength = mains.length;
+
+    const desserts = this.props.order.diner1.desserts;
+    // const dessertsLength = desserts.length;
+
+
 
     return (
       <div>
         <p>YOUR ORDER FOR 2</p>
         <p>Yor waiter today is Pierre.</p>
         <p>diner 1</p>
-        {this.props.order.map(dishId =>
-          <div key={dishId}>
-            {dishId < 5  &&
-              <p>
-                <button id={dishId}>-</button>
-                {Data.starters[dishId - 1].name}
-                {'........'}
-                £{Data.starters[dishId - 1].price}
-              </p>
-            }
-            {dishId < 9  &&
-              dishId > 4 &&
-              <p>
-                <button id={dishId}>-</button>
-                {Data.mains[dishId - 5].name}
-                {'........'}
-                £{Data.mains[dishId - 5].price}
-              </p>
-            }
-            {dishId < 12  &&
-              dishId > 8 &&
-              <p>
-                <button id={dishId}>-</button>
-                {Data.desserts[dishId - 9].name}
-                {'........'}
-                £{Data.desserts[dishId - 9].price}
-              </p>
-            }
+        {starters[0] &&
+          <p>
+            <button id="starter" onClick={this.props.removeItem}>-</button>
+            {starters[0].name}
+            {'........'}
+            £{starters[0].price}
+          </p>
+        }
+        {mains[0] &&
+          <p>
+            <button id="main" onClick={this.props.removeItem}>-</button>
+            {mains[0].name}
+            {'........'}
+            £{mains[0].price}
+          </p>
+        }
+        {desserts[0] &&
+          <p>
+            <button id="dessert" onClick={this.props.removeItem}>-</button>
+            {desserts[0].name}
+            {'........'}
+            £{desserts[0].price}
+          </p>
+        }
 
 
 
-
-          </div>
-        )}
         <p>-------</p>
         <p>Total</p>
         <p>{this.props.total}</p>
