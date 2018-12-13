@@ -1,43 +1,33 @@
 OpenTable front-end coding challenge
 ====================================
 
-Thank you for accepting our coding challenge. Please take as much time as required to give us a good indication of your coding strengths, as your application will provide many topics of conversation in the next interview stage.
+## Running
+
+Install dependencies via
+
+    $ yarn install
+
+and run the app in development mode via
+
+    $ yarn start
+
+it'll open the page (localhost:8080) in the default browser.
 
 
-## The task
+## Comments on the problem and my work
 
-We would like you to build a web application.
-- The application will allow one user to select dishes on behalf of two diners.
-- The application will present a menu that will be provided and may later require adjustment by a restaurant.
-- The application will enforce some restrictions provided by the restaurant. (see [#rules](#rules))
+### Journey until now
+For starter (pun intended), I liked the challenge spec and enjoyed working on it, thanks.
 
-We have prepared a basic application structure for you using React and Webpack. Please add any additional libraries that you think are suitable, for example for CSS and testing.
+First I've checked some sites (OpenTable of course, but also Just Eat, etc) to collect ideas about how ordering food typically looks like, then started designing (both UI and logic) on paper (see photos in 'docs/ideation/'), asked for details over email and started working on the code then.
 
-The menu data is provided in `menu-data.json` and the application is in `src/App.js`.
+During coding, I needed to restructure the code, especially the state, a few times (as can be seen in git log), as it was easier for me to go step-by-step and rethink the code if I didn't like it than trying to design and build the whole in one go.
 
-Please write as clean and maintainable code as possible, and make sure that it's covered by test cases.
+### Further improvements
+From functionality perspective, the current code covers the requirements: there is no way to order an invalid basket and there are messages covering all problems, however it does not have good usability, as some messages are showing problems the user need to fulfil (e.g. missing courses), while others are hints of what cannot be done (e.g. about invalid combinations). This is due to that I wanted to first get to a fully working solution, and redesign it afterwards.
 
+About the code, it's kind of inelegant for now - too many things are hardcoded, as mentioned above, wanted to reach a functioning state and refactor afterwards (which would be the next to do).
 
-## Rules
+Tests are also missing from this submission - I'm just learning TDD now and I'm not yet confident in it, especially about testing React, and didn't want to confuse myself and fumble the test because of my inexperience.
 
-
-_To recap, you will build an interface that allows a user to select dishes for a fixed party of **two diners**._\
-This restaurant unfortunately has a number of rules about the meals that can be ordered.
-
-- Each person must have at least two courses, one of which must be a main.
-- Each diner cannot have more than one of the same course.
-- There is only one piece of cheesecake left.
-- Pierre the snobby waiter will not let you have prawn cocktail and salmon fillet in the same meal.
-
-
-## Acceptance criteria
-
-- The total bill amount is displayed when at least one dish has been selected.
-- An error message is displayed when I try to select an invalid menu combination.
-
-
-## Submission
-
-Please submit your program either by sending a zip file or by providing a link to a repository, dropbox, etc to your point of contact at OpenTable.
-
-
+I also had other ideas to extend the problem with that I'd add later, like possibility to select another waiter, Luigi, who has no problem serving multiple seafood, but treats 'Vegetarian Lasagne' as heresy.
