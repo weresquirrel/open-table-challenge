@@ -11,45 +11,47 @@
 
 .order h2 {
   text-align: center;
+  font-size: larger;
+  text-transform: uppercase;
 }
 
-.order .waiter {
+.waiter {
   text-align: center;
 }
 
-.order .messageBox {
+.messageBox {
   color: white;
   background-color: #ad9595;
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
-.order .message {
+.message {
   padding: 3px;
 }
 
-.order .ordered {
+.ordered {
   padding: 15px;
 }
 
-.order .dish {
+.dish {
   display: flex;
   justify-content: space-between;
   padding-top: 5px;
 }
 
-.order .dishDetails {
+.dishDetails {
   display: flex;
   justify-content: space-between;
   width: 80%;
 }
 
-.order .minusBtn {
+.minusBtn {
   width: 20px;
   height: 20px;
 }
 
-.order .total {
+.total {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid black;

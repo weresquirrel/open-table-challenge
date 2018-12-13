@@ -3,9 +3,7 @@ import styles from "./Order.css";
 
 class Order extends React.Component {
   render() {
-    const starters = this.props.order.diner1.starters;
-    const mains = this.props.order.diner1.mains;
-    const desserts = this.props.order.diner1.desserts;
+    const diners = this.props.diners;
 
     let messages = [];
     if(this.props.warning.seaStop == true) {
@@ -29,48 +27,55 @@ class Order extends React.Component {
           )}
         </div>
 
-        <h3>diner 1</h3>
-        <div className={styles.ordered}>
-          {starters[0] &&
-            <div className={styles.dish}>
-              <button
-                id="starter"
-                onClick={this.props.removeItem}
-                className={styles.minusBtn}
-              >-</button>
-              <div className={styles.dishDetails}>
-                <p>{starters[0].name}</p>
-                <p>£{starters[0].price}</p>
+        <div>
+          {diners.map(diner =>
+            <div key={diner.name}>
+              <h3>{diner.name}</h3>
+              <div className={styles.ordered}>
+                {diner.order.starters[0] &&
+                  <div className={styles.dish}>
+                    <button
+                      id={`${diner.name}-starter`}
+                      onClick={this.props.removeItem}
+                      className={styles.minusBtn}
+                    >-</button>
+                    <div className={styles.dishDetails}>
+                      <p>{diner.order.starters[0].name}</p>
+                      <p>£{diner.order.starters[0].price}</p>
+                    </div>
+                  </div>
+                }
+                {diner.order.mains[0] &&
+                  <div className={styles.dish}>
+                    <button
+                      id={`${diner.name}-main`}
+                      onClick={this.props.removeItem}
+                      className={styles.minusBtn}
+                    >-</button>
+                    <div className={styles.dishDetails}>
+                      <p>{diner.order.mains[0].name}</p>
+                      <p>£{diner.order.mains[0].price}</p>
+                    </div>
+                  </div>
+                }
+                {diner.order.desserts[0] &&
+                  <div className={styles.dish}>
+                    <button
+                      id={`${diner.name}-dessert`}
+                      onClick={this.props.removeItem}
+                      className={styles.minusBtn}
+                    >-</button>
+                    <div className={styles.dishDetails}>
+                      <p>{diner.order.desserts[0].name}</p>
+                      <p>£{diner.order.desserts[0].price}</p>
+                    </div>
+                  </div>
+                }
               </div>
             </div>
-          }
-          {mains[0] &&
-            <div className={styles.dish}>
-              <button
-                id="main"
-                onClick={this.props.removeItem}
-                className={styles.minusBtn}
-              >-</button>
-              <div className={styles.dishDetails}>
-                <p>{mains[0].name}</p>
-                <p>£{mains[0].price}</p>
-              </div>
-            </div>
-          }
-          {desserts[0] &&
-            <div className={styles.dish}>
-              <button
-                id="dessert"
-                onClick={this.props.removeItem}
-                className={styles.minusBtn}
-              >-</button>
-              <div className={styles.dishDetails}>
-                <p>{desserts[0].name}</p>
-                <p>£{desserts[0].price}</p>
-              </div>
-            </div>
-          }
+          )}
         </div>
+
         {this.props.total > 0 &&
           <div className={styles.total}>
             <p>Total</p>

@@ -17,21 +17,21 @@
   margin-bottom: 5px;
 }
 
-.menu .dish {
+.dish {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   padding-left: 5px;
   padding-bottom: 20px;
 }
 
-.menu .dishDetails {
+.dishDetails {
   display: flex;
   justify-content: space-between;
   width: 20%;
   padding-left: 20px;
 }
 
-.menu .addBtn {
+.addBtn {
   width: 20px;
   height: 20px;
 }

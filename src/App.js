@@ -15,9 +15,18 @@ class App extends React.Component {
     this.calculateTotal = this.calculateTotal.bind(this);
     this.state = {
       total: 0,
-      order: {
-        diner1: {starters: [], mains: [], desserts: []}
-      },
+      diners: [
+        {
+          name: 'diner1',
+          selected: true,
+          order: {starters: [], mains: [], desserts: []}
+        },
+        {
+          name: 'diner2',
+          selected: false,
+          order: {starters: [], mains: [], desserts: []}
+        }
+      ],
       warning: {mainMust: true, seaStop: false, minCourse: false}
     };
   }
@@ -25,73 +34,109 @@ class App extends React.Component {
     addItem(e) {
       const dishId = parseInt(e.target.id);
       this.checkConditions();
+      let order = {};
 
       Data.starters.map(dish => {
         if(dish.id == dishId) {
-          if(this.state.order.diner1.starters.length < 1 &&
-            (this.state.warning.seaStop == false || dishId !== 4)) {
-            const d = {id: dishId, name: dish.name, price: dish.price};
-            const s = this.state.order.diner1.starters;
-            s.push(d);
-            this.checkConditions();
-          }
+          order = {
+            category: 'starter',
+            id: dishId,
+            name: dish.name,
+            price: dish.price};
         }
       });
       Data.mains.map(dish => {
         if(dish.id == dishId) {
-          if (this.state.order.diner1.mains.length < 1 &&
-            (this.state.warning.seaStop == false || dishId !== 7)) {
-            const d = {id: dishId, name: dish.name, price: dish.price};
-            const m = this.state.order.diner1.mains;
-            m.push(d);
-            this.checkConditions();
-          }
+          order = {
+            category: 'main',
+            id: dishId,
+            name: dish.name,
+            price: dish.price};
         }
       });
       Data.desserts.map(dish => {
         if(dish.id == dishId) {
-          if (this.state.order.diner1.desserts.length < 1) {
-            const d = {id: dishId, name: dish.name, price: dish.price};
-            const de = this.state.order.diner1.desserts;
-            de.push(d);
-          }
+          order = {
+            category: 'dessert',
+            id: dishId,
+            name: dish.name,
+            price: dish.price};
         }
       });
+      this.state.diners.map(diner => {
+        if(diner.selected == true) {
+          switch (order.category) {
+            case 'starter':
+              if(diner.order.starters.length < 1
+                // && (this.state.warning.seaStop == false || dishId !== 4)
+              ){
+                const d = {id: dishId, name: order.name, price: order.price};
+                const s = diner.order.starters;
+                s.push(d);
+                this.checkConditions();
+              }
+              break;
+            case 'main':
+              if(diner.order.mains.length < 1
+                // && (this.state.warning.seaStop == false || dishId !== 7)
+              ){
+                const d = {id: dishId, name: order.name, price: order.price};
+                const m = diner.order.mains;
+                m.push(d);
+                this.checkConditions();
+              }
+              break;
+
+            case 'dessert':
+              if(diner.order.desserts.length < 1 ){
+                const d = {id: dishId, name: order.name, price: order.price};
+                const de = diner.order.desserts;
+                de.push(d);
+                this.checkConditions();
+              }
+              break;
+          }
+        }
+      })
       this.calculateTotal();
     }
 
     removeItem(e) {
-      const category = e.target.id;
-      switch (category) {
-        case 'starter':
-          let newState1 = Object.assign({}, this.state);
-          newState1.order.diner1.starters = [];
-          this.setState(newState1);
-          this.calculateTotal();
-          this.checkConditions();
-          break;
-        case 'main':
-          let newState2 = Object.assign({}, this.state);
-          newState2.order.diner1.mains = [];
-          this.setState(newState2);
-          this.calculateTotal();
-          this.checkConditions();
-          break;
-        case 'dessert':
-          let newState3 = Object.assign({}, this.state);
-          newState3.order.diner1.desserts = [];
-          this.setState(newState3);
-          this.calculateTotal();
-          break;
-      }
+      const id = e.target.id;
+
+      this.state.diners.map(diner => {
+        if(id == `${diner.name}-starter`) {
+          if(diner.selected == true) {
+            let a = diner.order.starters;
+            a.splice(0, 1);
+            this.calculateTotal();
+            // this.checkConditions();
+          }
+        } else if (id == `${diner.name}-main`) {
+            if(diner.selected == true) {
+              let a = diner.order.mains;
+              a.splice(0, 1);
+              this.calculateTotal();
+              // this.checkConditions();
+            }
+        } else if (id == `${diner.name}-dessert`) {
+            if(diner.selected == true) {
+              let a = diner.order.desserts;
+              a.splice(0, 1);
+              this.calculateTotal();
+              // this.checkConditions();
+            }
+        }
+      });
     }
 
     calculateTotal() {
       let t = 0;
-      if(this.state.order.diner1.starters[0]) {t = t + this.state.order.diner1.starters[0].price};
-      if(this.state.order.diner1.mains[0]) {t = t + this.state.order.diner1.mains[0].price};
-      if(this.state.order.diner1.desserts[0]) {t = t + this.state.order.diner1.desserts[0].price};
-
+      this.state.diners.map(diner => {
+        if(diner.order.starters[0]) {t = t + diner.order.starters[0].price};
+        if(diner.order.mains[0]) {t = t + diner.order.mains[0].price};
+        if(diner.order.desserts[0]) {t = t + diner.order.desserts[0].price};
+      });
       this.setState({total: t});
     }
 
@@ -99,19 +144,19 @@ class App extends React.Component {
       let newWarning = Object.assign({}, this.state.warning);
 
       // main must
-      if (this.state.order.diner1.mains.length < 1) {
-        newWarning.mainMust = true;
-      } else {
-        newWarning.mainMust = false;
-      }
+      // if (this.state.order.diner1.mains.length < 1) {
+      //   newWarning.mainMust = true;
+      // } else {
+      //   newWarning.mainMust = false;
+      // }
 
       // seaStop
-      if ((this.state.order.diner1.starters.length > 0 && this.state.order.diner1.starters[0].id == 4) ||
-        (this.state.order.diner1.mains.length > 0 && this.state.order.diner1.mains[0].id == 7)) {
-        newWarning.seaStop = true;
-      } else {
-        newWarning.seaStop = false;
-      }
+      // if ((this.state.order.diner1.starters.length > 0 && this.state.order.diner1.starters[0].id == 4) ||
+      //   (this.state.order.diner1.mains.length > 0 && this.state.order.diner1.mains[0].id == 7)) {
+      //   newWarning.seaStop = true;
+      // } else {
+      //   newWarning.seaStop = false;
+      // }
 
       // 2 course at least
       // only one/category
@@ -127,7 +172,7 @@ class App extends React.Component {
             <div className={styles.wrap}>
               <Menu addItem={this.addItem}/>
               <Order
-                order={this.state.order}
+                diners={this.state.diners}
                 total={this.state.total}
                 warning={this.state.warning}
                 removeItem={this.removeItem}
