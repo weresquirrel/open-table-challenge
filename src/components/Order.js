@@ -14,10 +14,18 @@ class Order extends React.Component {
       const message = 'Everyone needs main course.';
       messages.push(message);
     }
+    if(this.props.warning.minCourseForAll == false) {
+      const message = 'Everyone needs 2 courses at least.';
+      messages.push(message);
+    }
+    if(this.props.warning.dessertMissing == true) {
+      const message = 'Sorry, this was our last piece of cheesecake';
+      messages.push(message);
+    }
 
     return (
       <div className={styles.order}>
-        <h2>Your order for 2</h2>
+        <h2>Your order for {diners.length}</h2>
         <p className={styles.waiter}>Yor waiter today is Pierre.</p>
         <div className={styles.messageBox}>
           {messages.map(message =>
@@ -30,6 +38,12 @@ class Order extends React.Component {
         <div>
           {diners.map(diner =>
             <div key={diner.name}>
+              <input
+                type="radio"
+                value={diner.name}
+                checked={this.props.dinerOn == diner.name}
+                onChange={this.props.changeSelected}
+              />
               <h3>{diner.name}</h3>
               <div className={styles.ordered}>
                 {diner.order.starters[0] &&
