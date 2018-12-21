@@ -1,61 +1,128 @@
 .order {
   background-color: white;
-  border: 1px solid grey;
-  border-radius: 6px;
-  flex-grow: 2;
-  margin: 10px;
-  padding: 10px;
+  border: 1px solid #d8d9db;
+  border-radius: 4px;
+
+  flex-grow: 1;
   align-self: flex-end;
-  color: #333333;
+
+  padding: 20px 0;
+  margin-left: 1.5%;
+
+  /* The Sketch file uses this with for the order-panel */
+  max-width: 400px;
+}
+
+@media (max-width: 530px) {
+  .order {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .order h2 {
-  text-align: center;
+  padding: 0 15px;
   font-size: larger;
-  text-transform: uppercase;
-}
-
-.waiter {
-  text-align: center;
 }
 
 .messageBox {
-  color: white;
-  background-color: #ad9595;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  color: #da3743;
+  border: 1px solid #da3743;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 15px 10px 15px;
 }
 
-.message {
-  padding: 3px;
+.messageBox:empty {
+  padding: 0;
+  border: none;
+}
+
+.diner {
+  display: flex;
+  align-items: baseline;
+  background-color: #f1f2f4;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.order h3 {
+  margin-left: 10px;
 }
 
 .ordered {
-  padding: 15px;
+  margin: 0 15px;
 }
 
 .dish {
   display: flex;
   justify-content: space-between;
-  padding-top: 5px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid #d8d9db;
+}
+
+.dish:last-child {
+  border: none;
 }
 
 .dishDetails {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 85%;
 }
 
 .minusBtn {
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 23px;
+  padding-bottom: 5px;
+  border-radius: 55px;
+  border: 1px solid #d8d9db;
+
+  font-size: 26px;
+  line-height: 0;
+  font-weight: 300;
+}
+
+.minusBtn:hover {
+  background-color: #f1f2f4;
+  cursor: pointer;
+}
+
+.minusBtn:focus,
+.submit:focus {
+  outline:none;
+}
+
+.totalContainer {
+  margin: 20px 15px 0 15px;
+  border-bottom: 1px solid #d8d9db;
 }
 
 .total {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid black;
-  margin-top: 5px;
-  padding-top: 5px;
+
+  width: 85%;
+  padding-bottom: 10px;
   font-weight: bold;
+}
+
+.btnContainer {
+  padding: 20px 15px 0 15px;
+}
+
+.submit {
+  background-color: #da3743;
+  border: 1px solid #da3743;
+  color: white;
+  border-radius: 4px;
+  width: 100%;
+  height: 40px;
+  font-size: initial;
+}
+
+.submit:hover {
+  background-color: #ff707b;
+  cursor: pointer;
 }

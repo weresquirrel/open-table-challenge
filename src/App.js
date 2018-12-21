@@ -228,7 +228,9 @@ class App extends React.Component {
     render() {
         return (
           <div className={styles.app}>
-            <h1>Restaurant Test</h1>
+            <header style={{backgroundImage: 'url(./pictures/Header.png)'}} >
+              <h1>Test restaurant name</h1>
+            </header>
             <div className={styles.wrap}>
               <Menu addItem={this.addItem}/>
               <Order
